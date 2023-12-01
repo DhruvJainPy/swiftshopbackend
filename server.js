@@ -37,7 +37,7 @@ app.use(
   })
 );
 
-//To Enable Request from http://localhost:3000.
+//To Enable Request from https://regal-paletas-84b3bb.netlify.app/.
 app.use(
   cors({
     origin: CLIENT_URL,
