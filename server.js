@@ -3,6 +3,7 @@ const cors = require("cors");
 const expressSession = require("express-session");
 const cookieParser = require("cookie-parser");
 const passport = require("passport");
+const port = process.env.PORT || 5000;
 
 //To use info from the .env files in the app.
 require("dotenv").config();
@@ -41,17 +42,21 @@ app.use(
   cors({
     origin: CLIENT_URL,
     credentials: true,
-    optionSuccessStatus:200,
+    optionSuccessStatus: 200,
   })
 );
 
-app.use((req,res,next)=>{
-    res.header('Access-Control-Allow-Headers, *, Access-Control-Allow-Origin', 'Origin, X-Requested-with, Content_Type,Accept,Authorization',CLIENT_URL);
-    if(req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods','PUT,POST,PATCH,DELETE,GET');
-        return res.status(200).json({});
-    }
-    next();
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Headers, *, Access-Control-Allow-Origin",
+    "Origin, X-Requested-with, Content_Type,Accept,Authorization",
+    CLIENT_URL
+  );
+  if (req.method === "OPTIONS") {
+    res.header("Access-Control-Allow-Methods", "PUT,POST,PATCH,DELETE,GET");
+    return res.status(200).json({});
+  }
+  next();
 });
 
 //To integrate passport strategies with the Server app.
@@ -64,9 +69,9 @@ app.use("/user", require("./Routes/UserRoute"));
 app.use("/products", require("./Routes/ProductRoute"));
 app.use("/cart", require("./Routes/CartRoute"));
 app.use("/orders", require("./Routes/OrderRoute"));
-app.use("/reviews",require("./Routes/ReviewRoute"));
-app.use("/admin/dashboard",require("./Routes/Admin-Routes/DashboardRoute"));
-app.use("/admin/products",require("./Routes/Admin-Routes/ProductRoute"));
+app.use("/reviews", require("./Routes/ReviewRoute"));
+app.use("/admin/dashboard", require("./Routes/Admin-Routes/DashboardRoute"));
+app.use("/admin/products", require("./Routes/Admin-Routes/ProductRoute"));
 
 //Error Handling Middleware ,In case an Internal Server Error is encountered.
 app.use((err, req, res, next) => {
@@ -79,6 +84,6 @@ app.use((err, req, res, next) => {
 });
 
 //To start the app on specified port.
-app.listen(5000, () => {
-  console.log("Server started on Port 5000!");
+app.listen(port, () => {
+  console.log(`Server started on Port ${port}!`);
 });
