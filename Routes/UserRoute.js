@@ -136,7 +136,7 @@ router.get(
   "/github/callback",
   passport.authenticate("github", {
     successRedirect: CLIENT_URL,
-    failureRedirect: `${CLIENT_URL}/login`,
+    failureRedirect: CLIENT_URL,
   })
 );
 
