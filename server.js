@@ -33,11 +33,9 @@ app.use(
     saveUninitialized: true,
     cookie: {
       maxAge: 24 * 60 * 60 * 1000,
-      cookie: {
-          sameSite: 'none', // must be 'none' to enable cross-site delivery
-          secure: true, // must be true if sameSite='none'
-          domain:process.env.DOMAIN
-        }
+      sameSite: "none", // must be 'none' to enable cross-site delivery
+      secure: true, // must be true if sameSite='none'
+      domain: process.env.DOMAIN,
     },
   })
 );
@@ -47,7 +45,6 @@ app.use(
   cors({
     origin: CLIENT_URL,
     credentials: true,
-    optionSuccessStatus: 200,
   })
 );
 
