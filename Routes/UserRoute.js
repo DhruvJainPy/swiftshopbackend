@@ -132,7 +132,13 @@ router.get(
   passport.authenticate("github", { scope: ["user:email"] })
 );
 
-router.get("/github/callback", passport.authenticate("github"));
+router.get(
+  "/github/callback",
+  passport.authenticate("github", {
+    successRedirect: `${CLIENT_URL}`,
+    failureRedirect: `${CLIENT_URL}/login`,
+  })
+);
 
 //To Logout an Logged In User.
 router.get("/logout", isAuthenticated, (req, res, next) => {
@@ -157,11 +163,13 @@ router.put("/profile/change", isAuthenticated, async (req, res, next) => {
       findUser.name = fname + " " + lname;
       findUser.gender = gender;
       await findUser.save();
-      return res.status(200).json({
-        success: true,
-        message: "Profile Changed Successfully!",
-        findUser,
-      });
+      return res
+        .status(200)
+        .json({
+          success: true,
+          message: "Profile Changed Successfully!",
+          findUser,
+        });
     }
     return res.status(404).json({ success: false, message: "User not found!" });
   } catch (error) {
