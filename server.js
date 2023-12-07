@@ -33,9 +33,8 @@ app.use(
     saveUninitialized: true,
     cookie: {
       maxAge: 24 * 60 * 60 * 1000,
-      // sameSite: "none", // must be 'none' to enable cross-site delivery
-      // secure: true, // must be true if sameSite='none'
-      // httpOnly: true,
+      SameSite: "none", // must be 'none' to enable cross-site delivery
+      secure: true, // must be true if sameSite='none'
     },
   })
 );
