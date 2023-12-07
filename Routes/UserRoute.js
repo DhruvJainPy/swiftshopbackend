@@ -25,6 +25,7 @@ router.get("/get", isAuthenticated, (req, res, next) => {
   // Set the headers to prevent caching
   res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
   res.setHeader("Pragma", "no-cache");
+  console.log(req);
   return res.status(200).send({ user: req.user });
 });
 
@@ -163,13 +164,11 @@ router.put("/profile/change", isAuthenticated, async (req, res, next) => {
       findUser.name = fname + " " + lname;
       findUser.gender = gender;
       await findUser.save();
-      return res
-        .status(200)
-        .json({
-          success: true,
-          message: "Profile Changed Successfully!",
-          findUser,
-        });
+      return res.status(200).json({
+        success: true,
+        message: "Profile Changed Successfully!",
+        findUser,
+      });
     }
     return res.status(404).json({ success: false, message: "User not found!" });
   } catch (error) {
