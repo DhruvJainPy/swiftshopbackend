@@ -158,7 +158,7 @@ router.post("/create", isAuthenticated, async (req, res, next) => {
     cancel_url: `${CLIENT_URL}/cart`,
   });
 
-  return res.json({ session });
+  return res.status(200).json({ session });
 });
 
 const createOrder = async (data, customer, cart, delivery) => {
