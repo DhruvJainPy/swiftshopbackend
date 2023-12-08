@@ -25,8 +25,7 @@ router.get("/get", isAuthenticated, (req, res, next) => {
   // Set the headers to prevent caching
   res.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
   res.setHeader("Pragma", "no-cache");
-  console.log(req);
-  return res.status(200).send({ user: req.user });
+   return res.status(200).send({ user: req.user });
 });
 
 //To Register a New User.
