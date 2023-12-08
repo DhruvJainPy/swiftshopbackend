@@ -4,7 +4,7 @@
   "description": "a proper e-commerce app",
   "scripts": {
     "test": "",
-    "start": "node server.js  stripe listen --forward-to /orders/stripe/webhook"
+    "start": "node server.js"
   },
   "author": "",
   "license": "ISC",
