@@ -61,6 +61,7 @@ router.get("/fetch", isAuthenticated, async (req, res, next) => {
 
 //To create an Order.
 router.post("/create", isAuthenticated, async (req, res, next) => {
+  console.log(req.body);
   const { cartId, userId } = req.body;
   const cart = await Cart.findOne({ _id: cartId }).populate(
     "products.productId"
