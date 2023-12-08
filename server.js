@@ -18,7 +18,7 @@ const { CLIENT_URL } = process.env;
 
 const app = express();
 
-require("https").globalAgent.options.rejectUnauthorized = false;
+app.set('trust proxy', 1);
 app.use(nocache());
 //To parse the data in incoming requests.
 app.use(express.json());
@@ -32,9 +32,9 @@ app.use(
     resave: false,
     saveUninitialized: true,
     cookie: {
-      SameSite: "none",
+      sameSite: "None",
       secure: true,
-      httpOnly: true,
+      httpOnly:true,
       maxAge: 24 * 60 * 60 * 1000,
     },
   })
